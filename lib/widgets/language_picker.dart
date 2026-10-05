@@ -14,6 +14,7 @@ const appLanguageNames = {
   'fr': 'Français',
   'es': 'Español',
   'hi': 'हिन्दी',
+  'ta': 'தமிழ்',
   'zh': '中文',
 };
 

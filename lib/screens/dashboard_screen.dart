@@ -31,6 +31,7 @@ import 'package:invoiso/services/pdf_service.dart';
 import 'package:invoiso/utils/formatters.dart';
 import 'package:invoiso/widgets/apply_payment_dialog.dart';
 import 'package:invoiso/widgets/customer_info_button.dart';
+import 'package:invoiso/widgets/tscii_converter_dialog.dart';
 import 'package:invoiso/utils/session_manager.dart';
 
 import 'package:invoiso/models/user.dart';
@@ -4398,6 +4399,13 @@ class _DashboardHomeState extends ConsumerState<DashboardHome> {
                   .findAncestorStateOfType<_DashboardScreenState>()
                   ?._selectedIndex = 7;
             });
+          }),
+          const SizedBox(height: 4),
+          _buildQuickActionRow(
+              Icons.transform_rounded,
+              'TSCII Converter / மாற்றி',
+              const Color(0xFF7B1FA2), () {
+            showTsciiConverterDialog(context);
           }),
         ],
       ),

@@ -32,6 +32,8 @@ class PdfFontAssets {
   // Tamil
   static const tamilFallback = 'assets/fonts/NotoSansTamil-Regular.ttf';
   static const tamilFallbackBold = 'assets/fonts/NotoSansTamil-Bold.ttf';
+  static const tscuTamilFallback = 'assets/fonts/TSCu_Paranar.ttf';
+  static const tscuTamilFallbackBold = 'assets/fonts/TSCu_paranarb.ttf';
 
   // Kannada
   static const kannadaFallback = 'assets/fonts/NotoSansKannada-Regular.ttf';

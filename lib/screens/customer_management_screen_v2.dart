@@ -4,6 +4,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:invoiso/providers/repositories.dart';
 import 'package:invoiso/utils/formatters.dart';
+import 'package:invoiso/utils/tscii_converter.dart';
+import 'package:invoiso/widgets/tscii_converter_dialog.dart';
 import 'package:invoiso/common/common.dart';
 import 'package:invoiso/common/supported_currencies.dart';
 import 'package:flutter/material.dart';
@@ -591,14 +593,29 @@ class _CustomerManagementScreenV2State extends ConsumerState<CustomerManagementS
                 _ruleNote(context, Icons.info_outline, AppLocalizations.of(context)!.customerMgmtCsvDuplicatesNote),
                 _ruleNote(context, Icons.info_outline, AppLocalizations.of(context)!.customerMgmtCsvMissingNameNote),
                 _ruleNote(context, Icons.info_outline, AppLocalizations.of(context)!.customerMgmtCsvEncodingNote),
+                _ruleNote(context, Icons.check_circle_outline, 'TSCII Tamil fonts auto-detected and converted to Unicode automatically.'),
                 const SizedBox(height: 16),
-                OutlinedButton.icon(
-                  onPressed: () async {
-                    Navigator.pop(ctx, false);
-                    await _downloadSampleCSV();
-                  },
-                  icon: const Icon(Icons.download),
-                  label: Text(AppLocalizations.of(context)!.customerMgmtDownloadSampleCsvButton),
+                Wrap(
+                  spacing: 12,
+                  runSpacing: 8,
+                  children: [
+                    OutlinedButton.icon(
+                      onPressed: () async {
+                        Navigator.pop(ctx, false);
+                        await _downloadSampleCSV();
+                      },
+                      icon: const Icon(Icons.download),
+                      label: Text(AppLocalizations.of(context)!.customerMgmtDownloadSampleCsvButton),
+                    ),
+                    OutlinedButton.icon(
+                      onPressed: () {
+                        Navigator.pop(ctx, false);
+                        showTsciiConverterDialog(context);
+                      },
+                      icon: const Icon(Icons.transform_rounded),
+                      label: const Text('TSCII Converter / மாற்றி'),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -674,12 +691,19 @@ class _CustomerManagementScreenV2State extends ConsumerState<CustomerManagementS
     var progressDialogShown = false;
     try {
       final bytes = await File(result.files.single.path!).readAsBytes();
-      // Strip UTF-8 BOM if present
-      final content = utf8.decode(
-        bytes.length >= 3 && bytes[0] == 0xEF && bytes[1] == 0xBB && bytes[2] == 0xBF
-            ? bytes.sublist(3)
-            : bytes,
-      );
+      String rawContent;
+      try {
+        // Strip UTF-8 BOM if present
+        final cleanBytes =
+            bytes.length >= 3 && bytes[0] == 0xEF && bytes[1] == 0xBB && bytes[2] == 0xBF
+                ? bytes.sublist(3)
+                : bytes;
+        rawContent = utf8.decode(cleanBytes);
+      } catch (_) {
+        // Fallback for legacy 8-bit ANSI / Latin-1 / Windows-1252 files (common for legacy TSCII files)
+        rawContent = latin1.decode(bytes);
+      }
+      final content = TsciiConverter.autoNormalize(rawContent);
 
       final rows = const CsvToListConverter(eol: '\n').convert(content);
       if (rows.isEmpty) {

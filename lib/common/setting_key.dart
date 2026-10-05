@@ -73,7 +73,7 @@ enum SettingKey {
   hideInvoiceNumberByDefault, // whether the "Hide invoice number in PDF" toggle is on by default for new invoices (default false)
   showDescriptionInPdf, // whether to print a product's description as a full-width row under each invoice item on A4 PDFs (default false)
   descriptionNewLineInPdf, // when showDescriptionInPdf is on: print the description as a full-width row below the item instead of a line under the item name (default false)
-  appLocale, // app UI language code, e.g. 'en' | 'ne' | 'bo' | 'fr' | 'es' | 'hi' | 'zh'; unset/empty = follow system locale
+  appLocale, // app UI language code, e.g. 'en' | 'ne' | 'bo' | 'fr' | 'es' | 'hi' | 'ta' | 'zh'; unset/empty = follow system locale
   onboardingCompleted, // '1' once the first-login onboarding wizard has been finished or skipped
   showCustomerBusinessNameInPdf, // whether to show the customer's business name on PDFs/thermal receipts (default true; only shown when non-empty)
   showCustomerAddressInPdf, // whether to show the customer's address on PDFs (default true; only shown when non-empty)

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  // Non-Latin app-UI text (Nepali/Hindi Devanagari, Tibetan) falls back to
+  // Non-Latin app-UI text (Nepali/Hindi Devanagari, Tibetan, Tamil) falls back to
   // these bundled fonts instead of rendering as tofu boxes.
-  static const _scriptFontFallback = ['NotoSansDevanagari', 'NotoSerifTibetan'];
+  static const _scriptFontFallback = [
+    'NotoSansDevanagari',
+    'NotoSerifTibetan',
+    'NotoSansTamil',
+    'TSCu_Paranar',
+  ];
 
   static ThemeData get light {
     final base = ThemeData(

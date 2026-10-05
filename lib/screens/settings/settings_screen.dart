@@ -19,6 +19,7 @@ import 'package:invoiso/screens/settings/customization_screen.dart';
 // import 'package:invoiso/screens/settings/user_management_screen.dart';
 import 'package:invoiso/screens/settings/user_management_screen_v2.dart';
 import 'package:invoiso/models/user.dart';
+import 'package:invoiso/screens/settings/tscii_converter_screen.dart';
 import 'package:invoiso/services/update_service.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
@@ -48,6 +49,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   static const _idProductColumns = 8;
   static const _idAccessibility = 9;
   static const _idCompanies = 10;
+  static const _idTsciiConverter = 11;
 
   int _selectedIndex = 0;
   int? _highlightCustomIndex;
@@ -97,6 +99,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       _idProductColumns,
       _idCustomize,
       _idAccessibility,
+      _idTsciiConverter,
       _idSoftwareInfo,
     ];
   }
@@ -227,6 +230,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         return const ProductColumnsSettingsScreen();
       case _idAccessibility:
         return const AccessibilityScreen();
+      case _idTsciiConverter:
+        return const TsciiConverterScreen();
       case _idCompanies:
         return CompanyManagementScreen(currentUser: widget.currentUser);
       default:
@@ -299,6 +304,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               NavigationRailDestination(
                 icon: const Icon(Icons.accessibility_new_rounded),
                 label: Text(l10n.settingsNavAccessibilityLabel),
+              ),
+              const NavigationRailDestination(
+                icon: Icon(Icons.transform_rounded),
+                label: Text('TSCII Converter'),
               ),
               NavigationRailDestination(
                 icon: Stack(

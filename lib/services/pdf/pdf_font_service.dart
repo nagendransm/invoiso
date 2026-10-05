@@ -67,6 +67,9 @@ class PdfFontService {
       rootBundle.load(PdfFontAssets.symbolsFallback),
       // 33: Inter
       rootBundle.load(PdfFontAssets.interRegular),
+      // 34-35: TSCu Tamil
+      rootBundle.load(PdfFontAssets.tscuTamilFallback),
+      rootBundle.load(PdfFontAssets.tscuTamilFallbackBold),
     ]);
 
     // Primary fonts
@@ -120,6 +123,8 @@ class PdfFontService {
     final symbols = pw.Font.ttf(fonts[31]);
 
     final inter = pw.Font.ttf(fonts[32]);
+    final tscuTamil = pw.Font.ttf(fonts[33]);
+    final tscuTamilBold = pw.Font.ttf(fonts[34]);
 
     return pw.ThemeData.withFont(
       base: regular,
@@ -147,6 +152,8 @@ class PdfFontService {
         devanagariBold,
         tamil,
         tamilBold,
+        tscuTamil,
+        tscuTamilBold,
         kannada,
         kannadaBold,
         telugu,

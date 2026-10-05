@@ -78,6 +78,16 @@ flutter:
         - asset: assets/fonts/NotoSerifTibetan-Regular.ttf
         - asset: assets/fonts/NotoSerifTibetan-Bold.ttf
           weight: 700
+    - family: NotoSansTamil
+      fonts:
+        - asset: assets/fonts/NotoSansTamil-Regular.ttf
+        - asset: assets/fonts/NotoSansTamil-Bold.ttf
+          weight: 700
+    - family: TSCu_Paranar
+      fonts:
+        - asset: assets/fonts/TSCu_Paranar.ttf
+        - asset: assets/fonts/TSCu_paranarb.ttf
+          weight: 700
     - family: Cookie
       fonts:
         - asset: assets/fonts/Cookie-Regular.ttf
